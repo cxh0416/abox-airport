@@ -1,0 +1,18 @@
+# Generated firmware build output
+app/build/
+boot/build/
+dist/
+out/
+**/*.elf
+**/*.bin
+**/*.map
+**/*.lst
+**/*.su
+
+# Local IDE and temporary files
+.vscode/
+.codex_doc_review/
+tmp/
+.tmp.driveupload/
+__pycache__/
+*.py[cod]
