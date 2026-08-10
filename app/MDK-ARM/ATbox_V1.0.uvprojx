@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F105xC</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;..\Core\User\Inc</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;..\Core\User\Inc;..\..\platform\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -530,6 +530,11 @@
           <GroupName>User</GroupName>
           <Files>
             <File>
+              <FileName>abox_product_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\User\Src\abox_product_port.c</FilePath>
+            </File>
+            <File>
               <FileName>app_rc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\User\Src\app_rc.c</FilePath>
@@ -543,11 +548,6 @@
               <FileName>cJSON.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\User\Src\cJSON.c</FilePath>
-            </File>
-            <File>
-              <FileName>ec_power.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Core\User\Src\ec_power.c</FilePath>
             </File>
             <File>
               <FileName>mqtt_app.c</FileName>
@@ -633,6 +633,26 @@
               <FileName>ota_info.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\User\Src\ota_info.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Platform</GroupName>
+          <Files>
+            <File>
+              <FileName>abox_platform_config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\platform\src\abox_platform_config.c</FilePath>
+            </File>
+            <File>
+              <FileName>abox_platform_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\platform\src\abox_platform_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>ec_power.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\platform\components\ec_power\ec_power.c</FilePath>
             </File>
           </Files>
         </Group>

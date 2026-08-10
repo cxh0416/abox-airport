@@ -58,8 +58,8 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/User/Src/app_rc_motor.c
     Core/User/Src/app_rc_ui.c
     Core/User/Src/bsp_can.c
+    Core/User/Src/abox_product_port.c
     Core/User/Src/cJSON.c
-    Core/User/Src/ec_power.c
     Core/User/Src/led_message.c
     Core/User/Src/motor485.c
     Core/User/Src/mqtt_app.c

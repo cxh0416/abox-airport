@@ -29,6 +29,7 @@
 
 #include "ota_core.h"
 #include "ota_ec_at.h"
+#include "abox_product_port.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -96,6 +97,7 @@ int main(void)
     MX_USART1_UART_Init();
     MX_UART5_Init();
     /* USER CODE BEGIN 2 */
+    ABox_ProductPlatform_Init();
     OTA_Core_Init();
 
     HAL_UARTEx_ReceiveToIdle_DMA(&huart1, g_ec_rx_dma_buf, sizeof(g_ec_rx_dma_buf));

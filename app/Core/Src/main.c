@@ -32,6 +32,7 @@
 #include <string.h>
 
 #include "app_rc.h"
+#include "abox_product_port.h"
 #include "boot_cfg.h"
 #include "ec_power.h"
 #include "led_message.h"
@@ -152,6 +153,8 @@ int main(void)
     MX_USART1_UART_Init();
     MX_UART5_Init();
     /* USER CODE BEGIN 2 */
+
+    ABox_ProductPlatform_Init();
 
     HAL_GPIO_WritePin(PVIN_OUT2_GPIO_Port, PVIN_OUT2_Pin, GPIO_PIN_SET);
 

@@ -53,10 +53,8 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/User/Src/boot_dbg.c
     Core/User/Src/boot_jump.c
-    Core/User/Src/ec_power.c
+    Core/User/Src/abox_product_port.c
     Core/User/Src/ota_core.c
-    Core/User/Src/ota_ec_at.c
-    Core/User/Src/ota_flash.c
     Core/User/Src/ota_http.c
     Core/User/Src/ota_info.c
 )
