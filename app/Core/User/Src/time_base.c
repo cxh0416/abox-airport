@@ -72,4 +72,28 @@ uint64_t TimeBase_GetMs(void)
     return ((uint64_t)g_unix_sec * 1000ULL) + delta;
 }
 
+uint8_t TimeBase_FormatUtcMs(char* out, uint16_t out_sz)
+{
+    char reversed[20];
+    uint64_t value;
+    uint16_t digits = 0U;
+    uint16_t i;
+
+    if ((out == 0) || (out_sz == 0U)) return 0U;
+    out[0] = '\0';
+
+    value = TimeBase_GetMs();
+    do
+    {
+        reversed[digits++] = (char)('0' + (value % 10ULL));
+        value /= 10ULL;
+    } while ((value != 0ULL) && (digits < (uint16_t)sizeof(reversed)));
+
+    if ((value != 0ULL) || ((uint16_t)(digits + 1U) > out_sz)) return 0U;
+
+    for (i = 0U; i < digits; i++) { out[i] = reversed[digits - i - 1U]; }
+    out[digits] = '\0';
+    return 1U;
+}
+
 uint8_t TimeBase_IsValid(void) { return g_valid; }

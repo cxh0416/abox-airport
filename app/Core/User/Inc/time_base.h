@@ -10,6 +10,7 @@ void TimeBase_UpdateFromCCLK(const char* line);
 
 /* 获取毫秒时间戳 */
 uint64_t TimeBase_GetMs(void);
+uint8_t TimeBase_FormatUtcMs(char* out, uint16_t out_sz);
 
 /* 是否已经同步 */
 uint8_t TimeBase_IsValid(void);

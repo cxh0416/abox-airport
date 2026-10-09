@@ -28,6 +28,12 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 project(${CMAKE_PROJECT_NAME})
 message("Build type: " ${CMAKE_BUILD_TYPE})
 
+# The boot image has a fixed 32 KiB Flash region. Keep Debug symbols while
+# using size optimization so the diagnostic build remains linkable within it.
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(CMAKE_C_FLAGS_DEBUG "-Os -g3")
+endif()
+
 set(ABOX_PRODUCT_CONFIG_DIR "${CMAKE_SOURCE_DIR}/../platform_config")
 set(ABOX_PLATFORM_SCHEDULER "BAREMETAL")
 add_subdirectory("${CMAKE_SOURCE_DIR}/../platform" abox_platform_build)

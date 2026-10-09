@@ -28,7 +28,7 @@ void MQTT_App_HandleHeartbeatTask(void)
 {
     static uint32_t resp_block_since = 0U;
     uint32_t now;
-    uint64_t ts_ms;
+    char ts_text[21];
     cJSON* root = 0;
     char json_buf[MQTT_APP_JSON_BUF_SZ];
 
@@ -64,7 +64,6 @@ void MQTT_App_HandleHeartbeatTask(void)
 
     if (!MQTT_Core_IsReady()) return;
 
-    ts_ms = TimeBase_GetMs();
     memset(json_buf, 0, sizeof(json_buf));
 
     root = cJSON_CreateObject();
@@ -73,7 +72,8 @@ void MQTT_App_HandleHeartbeatTask(void)
     if (cJSON_AddStringToObject(root, "type", "heartbeat") == 0) goto EXIT;
     if (cJSON_AddNumberToObject(root, "seqNo", (double)g_mqtt_app_seq_no) == 0) goto EXIT;
     if (cJSON_AddStringToObject(root, "version", MQTT_APP_VERSION_STR) == 0) goto EXIT;
-    if (cJSON_AddNumberToObject(root, "timestamp", (double)ts_ms) == 0) goto EXIT;
+    if (!TimeBase_FormatUtcMs(ts_text, sizeof(ts_text))) goto EXIT;
+    if (cJSON_AddRawToObject(root, "timestamp", ts_text) == 0) goto EXIT;
 
     {
         cJSON* data_obj = cJSON_CreateObject();

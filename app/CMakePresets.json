@@ -31,6 +31,14 @@
                 "CMAKE_BUILD_TYPE": "Release",
                 "LOCKCTRL_DIAG485": "ON"
             }
+        },
+        {
+            "name": "Relay485Test",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "ABOX_RELAY485_TEST": "ON"
+            }
         }
     ],
     "buildPresets": [
@@ -45,6 +53,10 @@
         {
             "name": "Diag485",
             "configurePreset": "Diag485"
+        },
+        {
+            "name": "Relay485Test",
+            "configurePreset": "Relay485Test"
         }
     ]
 }

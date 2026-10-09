@@ -115,9 +115,11 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-    /* UART5 interrupt Init */
+    /* UART5 interrupt Init (formal application only; relay diagnostic polls RXNE). */
+#if !defined(ABOX_RELAY485_TEST) || !(ABOX_RELAY485_TEST)
     HAL_NVIC_SetPriority(UART5_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(UART5_IRQn);
+#endif
   /* USER CODE BEGIN UART5_MspInit 1 */
 
   /* USER CODE END UART5_MspInit 1 */
@@ -207,7 +209,9 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
     HAL_GPIO_DeInit(GPIOD, GPIO_PIN_2);
 
     /* UART5 interrupt Deinit */
+#if !defined(ABOX_RELAY485_TEST) || !(ABOX_RELAY485_TEST)
     HAL_NVIC_DisableIRQ(UART5_IRQn);
+#endif
   /* USER CODE BEGIN UART5_MspDeInit 1 */
 
   /* USER CODE END UART5_MspDeInit 1 */

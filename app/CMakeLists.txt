@@ -51,29 +51,38 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 )
 
 # Add sources to executable
-target_sources(${CMAKE_PROJECT_NAME} PRIVATE
-    Core/User/Src/app_rc.c
-    Core/User/Src/app_rc_emout.c
-    Core/User/Src/app_rc_led.c
-    Core/User/Src/app_rc_motor.c
-    Core/User/Src/app_rc_ui.c
-    Core/User/Src/bsp_can.c
-    Core/User/Src/abox_product_port.c
-    Core/User/Src/cJSON.c
-    Core/User/Src/led_message.c
-    Core/User/Src/motor485.c
-    Core/User/Src/mqtt_app.c
-    Core/User/Src/mqtt_app_cmd.c
-    Core/User/Src/mqtt_app_hb.c
-    Core/User/Src/mqtt_core.c
-    Core/User/Src/mqtt_core_parser.c
-    Core/User/Src/mqtt_core_port.c
-    Core/User/Src/ota_info.c
-    Core/User/Src/rc_logic.c
-    Core/User/Src/rc_protocol.c
-    Core/User/Src/serial_bus.c
-    Core/User/Src/time_base.c
-)
+option(ABOX_RELAY485_TEST "Build the isolated RS485 relay test application" OFF)
+
+if(ABOX_RELAY485_TEST)
+    target_sources(${CMAKE_PROJECT_NAME} PRIVATE
+        Core/User/Src/relay485_protocol.c
+        Core/User/Src/relay485_test.c
+    )
+else()
+    target_sources(${CMAKE_PROJECT_NAME} PRIVATE
+        Core/User/Src/app_rc.c
+        Core/User/Src/app_rc_emout.c
+        Core/User/Src/app_rc_led.c
+        Core/User/Src/app_rc_motor.c
+        Core/User/Src/app_rc_ui.c
+        Core/User/Src/bsp_can.c
+        Core/User/Src/abox_product_port.c
+        Core/User/Src/cJSON.c
+        Core/User/Src/led_message.c
+        Core/User/Src/motor485.c
+        Core/User/Src/mqtt_app.c
+        Core/User/Src/mqtt_app_cmd.c
+        Core/User/Src/mqtt_app_hb.c
+        Core/User/Src/mqtt_core.c
+        Core/User/Src/mqtt_core_parser.c
+        Core/User/Src/mqtt_core_port.c
+        Core/User/Src/ota_info.c
+        Core/User/Src/rc_logic.c
+        Core/User/Src/rc_protocol.c
+        Core/User/Src/serial_bus.c
+        Core/User/Src/time_base.c
+    )
+endif()
 
 # Product handwritten headers stay outside the generated CubeMX directory.
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
@@ -84,6 +93,15 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
 target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined symbols
 )
+
+if(ABOX_RELAY485_TEST)
+    target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE ABOX_RELAY485_TEST=1)
+endif()
+
+option(LOCKCTRL_DIAG485 "Enable the RS485 diagnostic build marker" OFF)
+if(LOCKCTRL_DIAG485)
+    target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE LOCKCTRL_DIAG485=1)
+endif()
 
 # Remove wrong libob.a library dependency when using cpp files
 list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)

@@ -219,15 +219,31 @@ RESPONSE:
             cJSON_AddStringToObject(resp, "type", "response");
             cJSON_AddNumberToObject(resp, "seqNo", (double)req_seq);
             cJSON_AddStringToObject(resp, "version", MQTT_APP_VERSION_STR);
-            cJSON_AddNumberToObject(resp, "timestamp", (double)TimeBase_GetMs());
-
-            cJSON_AddItemToObject(resp, "data", resp_data);
-            cJSON_AddNumberToObject(resp_data, "code", code);
-            cJSON_AddStringToObject(resp_data, "msg", msg);
-
-            if (cJSON_PrintPreallocated(resp, buf, sizeof(buf), 0))
             {
-                MQTT_App_SetPendingResponse(g_mqtt_app_ctrl_topic, buf);
+                char ts_text[21];
+                if (!TimeBase_FormatUtcMs(ts_text, sizeof(ts_text)) ||
+                    (cJSON_AddRawToObject(resp, "timestamp", ts_text) == 0))
+                {
+                    cJSON_Delete(resp);
+                    resp = 0;
+                }
+            }
+
+            if (resp != 0)
+            {
+                cJSON_AddItemToObject(resp, "data", resp_data);
+                cJSON_AddNumberToObject(resp_data, "code", code);
+                cJSON_AddStringToObject(resp_data, "msg", msg);
+
+                if (cJSON_PrintPreallocated(resp, buf, sizeof(buf), 0))
+                {
+                    MQTT_App_SetPendingResponse(g_mqtt_app_ctrl_topic, buf);
+                }
+            }
+            else
+            {
+                cJSON_Delete(resp_data);
+                resp_data = 0;
             }
         }
 
