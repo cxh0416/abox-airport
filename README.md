@@ -14,7 +14,7 @@
 
 ## 公共依赖与协议维护
 
-首次检出后，在仓库根目录执行 `git submodule update --init --recursive`，取得本产品已固定提交的 [A-BOX 公共平台](https://github.com/cxh0416/abox-platform-firmware)。该命令不会把平台升级到最新提交；构建使用 `platform/` 中的固定版本。
+首次检出后，在仓库根目录执行 `git submodule update --init --recursive`，取得本产品已固定提交的 [A-BOX 公共平台](https://github.com/cxh0416/abox-platform)。该命令不会把平台升级到最新提交；构建使用 `platform/` 中的固定版本。
 
 公共固件组件、Boot 和公共 MQTT 规则在平台仓库维护；产品业务、硬件适配及产品协议在本仓库维护。[内部协议文档中心](https://github.com/cxh0416/protocol-docs) 只同步与发布已登记协议，协议原文仍在各源仓库修改。
 
